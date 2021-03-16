@@ -22,12 +22,34 @@ if ($requestMethod == 'POST') {
         $bb_detail = $input->bb_detail;
         $bb_name = $input->bb_name;
 
+        $bb_image = $input->bb_image;
+
+        $folderPath = "../images/news/";
+
+        $bb_image_file_base64;
+
+        if ($bb_image !== null) {
+            $image_parts = explode(";base64,", $bb_image);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $bb_image_file_base64 = base64_decode($image_parts[1]);
+            $bb_image = uniqid() . '.png';
+
+        } else {
+            $bb_image = null;
+        }
+
         include_once "../configs/connectDB.php";
 
-        $sql = "INSERT INTO `tbl_bulletin_board` (`bb_id`, `bb_name`, `bb_detail`, `bb_date`)
-                VALUES (NULL, '$bb_name', '$bb_detail', current_timestamp());";
+        $sql = "INSERT INTO `tbl_bulletin_board` (`bb_id`, `bb_name`, `bb_detail`, `bb_date`,`bb_image`)
+                VALUES (NULL, '$bb_name', '$bb_detail', current_timestamp(),'$bb_image');";
 
         if (mysqli_query($conn, $sql)) {
+
+            if ($bb_image !== null) {
+                file_put_contents("$folderPath" . $bb_image, $bb_image_file_base64);
+            }
 
             echo json_encode([
                 "error" => false,

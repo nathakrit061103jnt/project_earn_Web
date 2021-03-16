@@ -80,6 +80,12 @@ if (isset($_SESSION['a_id'])) {
                                             <input v-model.trim="input.bb_name" type="text" class="form-control"
                                                 autofocus required>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="cc-payment" class="control-label mb-1">รูปประกอบ</label>
+                                            <input @change="up_a_img" type="file" class="form-control" required>
+                                        </div>
+                                        <img v-if="input.bb_image !== null" :src="input.bb_image" class="img-fluid"
+                                            alt="" srcset="">
                                         <div class=" form-group">
                                             <label for="cc-name" class="control-label mb-1">รายละเอียด</label>
                                             <textarea v-model.trim="input.bb_detail" rows="9" placeholder=""
@@ -114,8 +120,11 @@ if (isset($_SESSION['a_id'])) {
         el: '#app',
         data: {
             bb_id: `<?=$_GET["bb_id"]?>`,
-            input: {
+            bb_image: null,
 
+            bb_image_type: null,
+            input: {
+                bb_image: null,
             },
         },
         mounted() {
@@ -129,15 +138,28 @@ if (isset($_SESSION['a_id'])) {
                         ...res.data[0]
                     }
 
+                    this.input.bb_image = `./images/news/${res.data[0].bb_image}`
+
+
+                    this.bb_image = `${res.data[0].bb_image}`
+
+                    console.log('this.input.bb_image ', this.input.bb_image)
+
+
                     // console.log('this.input', this.input)
                 }).catch(e => {
                     console.error(e)
                 })
             },
+
             updateData() {
+
+                this.input.bb_image = `${this.bb_image}`
+
                 const payload = {
                     action: "updateTodo",
                     bb_id: this.bb_id,
+                    bb_image_type: this.bb_image_type,
                     ...this.input
                 }
                 console.log('payload', payload)
@@ -160,6 +182,42 @@ if (isset($_SESSION['a_id'])) {
                         text: 'กรุณาตรวจสอบความถูกต้องของข้อมูล \n อาจเกิดจากการอัปโหลดไฟล์ไม่สำเร็จ!',
                     });
                 })
+            },
+            up_a_img(e) {
+                let reader = new FileReader();
+                const fileType = this.checkImageTypeUpload(e);
+                this.bb_image_type = fileType
+                if (fileType !== null) {
+                    reader.onload = (e) => {
+                        this.input.bb_image = e.target.result;
+                        this.bb_image = e.target.result;
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                } else {
+                    this.input.bb_image = this.bb_image
+                    this.bb_image_type = null
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ไฟล์ที่ Upload',
+                        text: 'กรุณา Upload ไฟล์รูปภาพที่เป็นนามสกุลไฟล์ .jpeg , .jpg , .png!',
+                    });
+                }
+            },
+            checkImageTypeUpload(e) {
+                let imageType = e.target.files[0].type;
+                switch (imageType) {
+                    case 'image/jpg':
+                        return "jpg";
+                        break;
+                    case 'image/jpeg':
+                        return "jpeg";
+                        break;
+                    case 'image/png':
+                        return "png";
+                        break;
+                    default:
+                        return null;
+                }
             },
         },
     });

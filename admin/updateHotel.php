@@ -227,7 +227,7 @@ if (isset($_SESSION['a_id'])) {
                     ...this.input
                 }
                 console.log('payload', payload)
-                axios.post('./api//updateHotel.php', payload).then(res => {
+                axios.post('./api/updateHotel.php', payload).then(res => {
                     // console.log(res)
                     Swal.fire({
                         position: 'center',

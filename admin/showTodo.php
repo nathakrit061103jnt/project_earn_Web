@@ -80,6 +80,8 @@ if (isset($_SESSION['a_id'])) {
                                             <input v-model.trim="input.bb_name" type="text" class="form-control"
                                                 autofocus readonly>
                                         </div>
+                                        <img v-if="input.bb_image !== null" :src="input.bb_image" class="img-fluid"
+                                            alt="" srcset="">
                                         <div class=" form-group">
                                             <label for="cc-name" class="control-label mb-1">รายละเอียด</label>
                                             <textarea v-model.trim="input.bb_detail" rows="9" placeholder=""
@@ -114,8 +116,11 @@ if (isset($_SESSION['a_id'])) {
         el: '#app',
         data: {
             bb_id: `<?=$_GET["bb_id"]?>`,
-            input: {
+            bb_image: null,
 
+            bb_image_type: null,
+            input: {
+                bb_image: null,
             },
         },
         mounted() {
@@ -129,11 +134,21 @@ if (isset($_SESSION['a_id'])) {
                         ...res.data[0]
                     }
 
+                    this.input.bb_image = `./images/news/${res.data[0].bb_image}`
+
+
+                    this.bb_image = `${res.data[0].bb_image}`
+
+                    console.log('this.input.bb_image ', this.input.bb_image)
+
+
                     // console.log('this.input', this.input)
                 }).catch(e => {
                     console.error(e)
                 })
             },
+
+
         },
     });
     </script>

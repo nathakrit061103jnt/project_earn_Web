@@ -80,6 +80,12 @@ if (isset($_SESSION['a_id'])) {
                                             <input v-model.trim="input.bb_name" type="text" class="form-control"
                                                 autofocus required>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="cc-payment" class="control-label mb-1">รูปประกอบ</label>
+                                            <input @change="up_a_img" type="file" class="form-control" required>
+                                        </div>
+                                        <img v-if="input.bb_image !== null" :src="input.bb_image" class="img-fluid"
+                                            alt="" srcset="">
                                         <div class=" form-group">
                                             <label for="cc-name" class="control-label mb-1">รายละเอียด</label>
                                             <textarea v-model.trim="input.bb_detail" rows="9" placeholder=""
@@ -113,7 +119,9 @@ if (isset($_SESSION['a_id'])) {
     var app = new Vue({
         el: '#app',
         data: {
-            input: {},
+            input: {
+                bb_image: null
+            },
         },
         methods: {
             inSertData() {
@@ -142,6 +150,41 @@ if (isset($_SESSION['a_id'])) {
                     });
                 })
             },
+            up_a_img(e) {
+                let reader = new FileReader();
+                const fileType = this.checkImageTypeUpload(e);
+
+                if (fileType !== null) {
+                    reader.onload = (e) => {
+                        this.input.bb_image = e.target.result;
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                } else {
+                    this.input.bb_image = null
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ไฟล์ที่ Upload',
+                        text: 'กรุณา Upload ไฟล์รูปภาพที่เป็นนามสกุลไฟล์ .jpeg , .jpg , .png!',
+                    });
+                }
+            },
+            checkImageTypeUpload(e) {
+                let imageType = e.target.files[0].type;
+                switch (imageType) {
+                    case 'image/jpg':
+                        return "jpg";
+                        break;
+                    case 'image/jpeg':
+                        return "jpeg";
+                        break;
+                    case 'image/png':
+                        return "png";
+                        break;
+                    default:
+                        return null;
+                }
+            },
+
         },
     });
     </script>
