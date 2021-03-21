@@ -86,6 +86,11 @@ if (isset($_SESSION['a_id'])) {
                                         </div>
                                         <img v-if="input.bb_image !== null" :src="input.bb_image" class="img-fluid"
                                             alt="" srcset="">
+                                        <div class="form-group">
+                                            <label for="cc-payment" class="control-label mb-1">วันที่</label>
+                                            <input v-model.trim="input.bb_date" type="date" class="form-control"
+                                                autofocus required>
+                                        </div>
                                         <div class=" form-group">
                                             <label for="cc-name" class="control-label mb-1">รายละเอียด</label>
                                             <textarea v-model.trim="input.bb_detail" rows="9" placeholder=""

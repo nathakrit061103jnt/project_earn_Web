@@ -23,6 +23,7 @@ if ($requestMethod == 'POST') {
         $bb_name = $input->bb_name;
 
         $bb_image = $input->bb_image;
+        $bb_date = $input->bb_date;
 
         $folderPath = "../images/news/";
 
@@ -43,7 +44,7 @@ if ($requestMethod == 'POST') {
         include_once "../configs/connectDB.php";
 
         $sql = "INSERT INTO `tbl_bulletin_board` (`bb_id`, `bb_name`, `bb_detail`, `bb_date`,`bb_image`)
-                VALUES (NULL, '$bb_name', '$bb_detail', current_timestamp(),'$bb_image');";
+                VALUES (NULL, '$bb_name', '$bb_detail','$bb_date','$bb_image');";
 
         if (mysqli_query($conn, $sql)) {
 

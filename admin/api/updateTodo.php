@@ -24,6 +24,7 @@ if ($requestMethod == 'POST') {
         $bb_name = $input->bb_name;
 
         $bb_image = $input->bb_image;
+        $bb_date = $input->bb_date;
 
         $bb_image_type = $input->bb_image_type;
 
@@ -48,7 +49,7 @@ if ($requestMethod == 'POST') {
 
         $sql = "UPDATE `tbl_bulletin_board` SET `bb_name` = '$bb_name' ,
                `bb_detail` = '$bb_detail' , `bb_date` = current_timestamp(),
-               `bb_image` = '$bb_image'
+               `bb_image` = '$bb_image',`bb_date`='$bb_date'
                 WHERE `tbl_bulletin_board`.`bb_id` = $bb_id;";
 
         if (mysqli_query($conn, $sql)) {

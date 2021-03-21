@@ -100,7 +100,7 @@ if (isset($_SESSION['a_id'])) {
                                             <input v-model.trim="input.at_p" type="text" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-payment" class="control-label mb-1">รูปหลัก</label>
+                                            <label for="cc-payment" class="control-label mb-1">รูปหลัก</label><br>
                                             <!-- <input @change="up_a_profile" type="file" class="form-control" readonly> -->
                                             <img v-if="input.at_profile !== null" :src="input.at_profile"
                                                 class="img-fluid" alt="" srcset="">

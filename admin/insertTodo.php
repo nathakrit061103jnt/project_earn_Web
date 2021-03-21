@@ -61,6 +61,8 @@ if (isset($_SESSION['a_id'])) {
         <?php include_once "./header2.php";?>
         <!-- HEADER DESKTOP-->
 
+
+
         <!-- MAIN CONTENT-->
         <div class="main-content" id="app">
             <div class="section__content section__content--p30">
@@ -68,6 +70,13 @@ if (isset($_SESSION['a_id'])) {
                     <div class="row my-5">
                         <div class="col-lg-12">
                             <div class="card">
+
+                                <?php
+
+    $date = date("Y-m-d");
+
+    ?>
+
                                 <div class="card-header">ฟอร์มเพิ่มข้อมูล</div>
                                 <div class="card-body">
                                     <div class="card-title">
@@ -86,6 +95,11 @@ if (isset($_SESSION['a_id'])) {
                                         </div>
                                         <img v-if="input.bb_image !== null" :src="input.bb_image" class="img-fluid"
                                             alt="" srcset="">
+                                        <div class="form-group">
+                                            <label for="cc-payment" class="control-label mb-1">วันที่</label>
+                                            <input v-model.trim="input.bb_date" type="date" class="form-control"
+                                                autofocus required>
+                                        </div>
                                         <div class=" form-group">
                                             <label for="cc-name" class="control-label mb-1">รายละเอียด</label>
                                             <textarea v-model.trim="input.bb_detail" rows="9" placeholder=""
@@ -120,7 +134,8 @@ if (isset($_SESSION['a_id'])) {
         el: '#app',
         data: {
             input: {
-                bb_image: null
+                bb_image: null,
+                bb_date: '<?=$date?>',
             },
         },
         methods: {
