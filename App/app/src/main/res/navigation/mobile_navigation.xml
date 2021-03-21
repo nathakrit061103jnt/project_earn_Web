@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.apptravel.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_attractionFragment"
+            app:destination="@id/attractionFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_hotelFragment"
+            app:destination="@id/hotelFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_bulletinBoaedFragment"
+            app:destination="@id/bulletinBoaedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.apptravel.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.apptravel.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/bulletinBoaedFragment"
+        android:name="com.example.apptravel.BulletinBoardFragment"
+        android:label="กระดานข่าว"
+        tools:layout="@layout/fragment_bulletin_boaed" />
+
+
+    <activity
+        android:id="@+id/bulletinBoardDetailActivity"
+        android:name="com.example.apptravel.BulletinBoardDetailActivity"
+        android:label="รายละเอียดข่าว"
+        tools:layout="@layout/activity_bulletin_board_detail" />
+    <fragment
+        android:id="@+id/attractionFragment"
+        android:name="com.example.apptravel.AttractionFragment"
+        android:label="สถานที่ท่องเที่ยว"
+        tools:layout="@layout/fragment_attraction" />
+    <fragment
+        android:id="@+id/hotelFragment"
+        android:name="com.example.apptravel.HotelFragment"
+        android:label="โรงเเรม"
+        tools:layout="@layout/fragment_hotel" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.apptravel.ProfileFragment"
+        android:label="ข้อมูลผู้ใช้"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/page2Activity2"
+        android:name="com.example.apptravel.Page2Activity2"
+        android:label="activity_page22"
+        tools:layout="@layout/activity_page22" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.apptravel.LoginActivity"
+        android:label="เข้าสู่ระบบ"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.apptravel.RegisterActivity"
+        android:label="ลงทะเบียนผู้ใช้"
+        tools:layout="@layout/activity_register" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.apptravel.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+
+</navigation>
