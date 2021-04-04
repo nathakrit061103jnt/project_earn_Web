@@ -1,7 +1,7 @@
 package com.example.apptravel;
 
 public class URLs {
-    public static final String IP = "http://192.168.1.28:81/";
+    public static final String IP = "http://192.168.1.28/";
     public static final String ROOT_URL = IP + "project_e/android_api/";
     public static final String URL_REGISTER = ROOT_URL + "register.php";
     public static final String URL_LOGIN = ROOT_URL + "login.php";
