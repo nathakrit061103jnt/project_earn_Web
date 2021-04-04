@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //validating inputs
         if (TextUtils.isEmpty(et_u_emailData)) {
-            et_u_email.setError("Please enter your username");
+            et_u_email.setError("Please enter your email");
             et_u_email.requestFocus();
             return;
         }
